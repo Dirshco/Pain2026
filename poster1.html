@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TGRF — Digital Phenotyping of the &ldquo;Invisible&rdquo; Patient</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* palette drawn from the TGRF community-wheel mark */
+  --blue:#3F7CB0; --green:#2F8F5B; --orange:#E2862E; --gray:#6E7680; --red:#C0473F; --purple:#6F4F95;
+  --navy:#1C3A56; --teal:#2F8F5B; --teal2:#4FAD78;
+  --gold:#E2862E; --gold2:#F0A857; --slate:#6E7680;
+  --sky:#EAF2F8; --cream:#F8F7F4; --white:#FFFFFF;
+  --border:#D7DEE6; --muted:#5E6E82; --body:#1E2D3D;
+  --badgebg:#F3E6CE;
+  --PW:3648px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#8A9BAD;display:flex;justify-content:center;
+  align-items:flex-start;padding:32px;font-family:'DM Sans',sans-serif;color:var(--body)}
+
+.wrap{transform-origin:top center;width:var(--PW)}
+.poster{width:var(--PW);background:var(--cream);display:flex;flex-direction:column}
+
+/* ── HEADER ── */
+.hdr{background:var(--navy);padding:54px 96px 46px;
+  display:grid;grid-template-columns:1fr 248px;gap:40px;align-items:start}
+.tags{display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap;align-items:center}
+.tag{font-size:32px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 20px;border-radius:6px}
+.tc{background:var(--gold2);color:var(--navy)}
+.tt{background:transparent;color:#9FC3DB;border:2px solid #9FC3DB}
+h1{font-family:'Source Serif 4',serif;font-weight:700;font-size:78px;
+  line-height:1.14;color:#fff;margin-bottom:26px}
+.sub{background:rgba(47,143,91,.22);border-left:7px solid var(--teal2);
+  padding:18px 26px;font-size:33px;font-style:italic;color:#fff;
+  line-height:1.5;margin-bottom:22px}
+.authors{font-size:32px;color:#fff;line-height:1.65}
+.authors strong{color:#fff;font-weight:600}
+
+/* badge / wheel mark */
+.badge{background:var(--badgebg);color:var(--navy);border-radius:14px;
+  width:248px;height:448px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;flex-shrink:0;text-align:center;gap:6px}
+.ring{width:148px;height:148px;border-radius:50%;margin-bottom:18px;position:relative;
+  background:conic-gradient(var(--blue) 0% 16.67%, var(--green) 16.67% 33.33%, var(--orange) 33.33% 50%, var(--gray) 50% 66.67%, var(--red) 66.67% 83.33%, var(--purple) 83.33% 100%);
+  box-shadow:0 0 0 5px var(--badgebg), 0 0 0 7px rgba(28,58,86,.18);}
+.ring::after{content:'';position:absolute;inset:30px;background:var(--badgebg);border-radius:50%}
+.badge .n{font-size:32px;font-weight:700;line-height:1.15;padding:0 18px;letter-spacing:.04em}
+.badge .l{font-size:19px;font-weight:700;letter-spacing:.07em;margin-top:8px;padding:0 14px;color:var(--muted)}
+.stripe{height:9px;background:linear-gradient(90deg,var(--blue),var(--green) 33%,var(--orange) 55%,var(--red) 75%,var(--purple))}
+
+/* ── BODY 4-COL ── */
+.body{display:grid;grid-template-columns:repeat(4,1fr)}
+.col{padding:60px 44px;display:flex;flex-direction:column;gap:42px}
+.cL{background:var(--cream);border-right:2px solid var(--border)}
+.cM{background:var(--white);border-right:2px solid var(--border)}
+.cR{background:var(--cream);border-right:2px solid var(--border)}
+.cD{background:var(--white)}
+
+/* ── section head ── */
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.bar{width:7px;border-radius:4px;flex-shrink:0}
+.bt{background:var(--teal);height:46px}
+.bg{background:var(--gold);height:46px}
+.bn{background:var(--navy);height:46px}
+.bs{background:var(--slate);height:46px}
+h2{font-size:36px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy)}
+
+/* ── text ── */
+p,li{font-size:31px;line-height:1.65;color:var(--body)}
+ul{padding-left:34px}
+li{margin-bottom:9px}
+li::marker{color:var(--teal)}
+
+/* ── pills ── */
+.pills{display:flex;flex-direction:column;gap:12px}
+.pill{background:var(--sky);border-left:6px solid var(--teal);
+  padding:14px 20px;border-radius:0 8px 8px 0;font-size:34px;color:var(--navy);line-height:1.4}
+
+/* ── feature 2x2 ── */
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fc{background:var(--sky);border-left:5px solid var(--teal);
+  border-radius:0 10px 10px 0;padding:16px;font-size:26px;color:var(--navy);line-height:1.45}
+.fc strong{display:block;font-size:25px;font-weight:700;color:var(--teal);margin-bottom:2px}
+
+/* ── coding-rubric list ── */
+.el{display:flex;flex-direction:column;gap:10px}
+.ei{font-size:32px;color:var(--navy);line-height:1.5;
+  padding-left:16px;border-left:4px solid var(--border)}
+
+/* ── figure box ── */
+.fb{background:var(--white);border:2px solid var(--border);border-radius:14px;overflow:hidden}
+.fh{background:var(--navy);color:#fff;font-size:30px;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;padding:14px 22px}
+.fd{padding:30px 30px 26px}
+.fcap{font-size:24px;color:var(--muted);font-style:italic;padding:14px 30px 24px}
+
+/* ── pie chart ── */
+.pie-wrap{display:flex;align-items:center;gap:36px;flex-wrap:wrap}
+.pie{width:250px;height:250px;border-radius:50%;flex-shrink:0;box-shadow:0 6px 18px rgba(28,58,86,.18)}
+.pie-legend{display:flex;flex-direction:column;gap:13px;flex:1;min-width:280px}
+.pl-item{display:flex;align-items:center;gap:14px;font-size:28px;color:var(--navy);line-height:1.3}
+.pl-sw{width:26px;height:26px;border-radius:6px;flex-shrink:0}
+.pl-code{color:var(--muted);font-weight:400;font-size:24px}
+
+/* ── mini bar chart (two-panel) ── */
+.mbch{display:flex;flex-direction:column;gap:18px}
+.mblabel{font-size:25px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.mbcrow{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:10px;margin-bottom:13px}
+.mbcname{font-size:22px;font-weight:600;color:var(--navy);line-height:1.25}
+.mbctrack{position:relative;background:#EEF2F6;border-radius:6px;height:42px;display:flex;align-items:center}
+.mbcfill{height:100%;border-radius:6px 0 0 6px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;min-width:34px}
+.mbcval{font-size:20px;font-weight:700;color:#fff}
+
+/* ── stats ── */
+.stats{display:flex;flex-direction:column;gap:14px}
+.sc{background:var(--navy);border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:22px}
+.sn{font-family:'Source Serif 4',serif;font-size:46px;font-weight:700;
+  color:var(--gold2);line-height:1;flex-shrink:0;min-width:200px}
+.sct{display:flex;flex-direction:column;gap:2px}
+.sd{font-size:24px;color:#fff;line-height:1.3}
+
+/* ── conclusions ── */
+.concl{display:flex;flex-direction:column;gap:14px}
+.ci2{display:flex;gap:14px;align-items:flex-start}
+.dot{width:13px;height:13px;border-radius:50%;background:var(--teal);
+  flex-shrink:0;margin-top:10px}
+.ct3{font-size:29px;line-height:1.6;color:var(--body)}
+
+/* ── info cards ── */
+.cms{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cm2{border-radius:12px;padding:18px 16px;display:flex;flex-direction:column;gap:6px}
+.ct2{font-size:25px;font-weight:700;line-height:1.2}
+.cd{font-size:23px;line-height:1.45}
+.ca{background:#D6EAF8;color:#1A5276}
+.cb{background:#D5F2E3;color:#1E6B49}
+
+/* ── KT ribbon ── */
+.kt{background:linear-gradient(135deg,var(--teal),var(--navy));
+  padding:44px 96px;display:flex;align-items:center;gap:0}
+.ktlb{display:flex;align-items:center;padding-right:52px;
+  border-right:2px solid rgba(255,255,255,.2);margin-right:52px;flex-shrink:0}
+.ktl{font-size:38px;font-weight:700;letter-spacing:.10em;
+  text-transform:uppercase;color:var(--gold2);white-space:nowrap}
+.ktg{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;flex:1}
+.kti{display:flex;gap:14px;align-items:flex-start}
+.ktt{font-size:30px;color:rgba(255,255,255,.92);line-height:1.5}
+.ktt strong{color:var(--gold2);display:block;font-size:31px;margin-bottom:3px}
+
+/* ── footer ── */
+.footer{background:var(--navy);padding:34px 96px 30px;
+  display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:52px;align-items:start}
+.ftl{font-size:30px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--gold2);margin-bottom:12px}
+.footer ul{padding-left:22px}
+.footer li{font-size:28px;color:#fff;line-height:1.6;margin-bottom:4px}
+.footer li::marker{color:var(--teal2)}
+.sig{display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0;width:240px}
+.sigring{width:84px;height:84px;border-radius:50%;position:relative;
+  background:conic-gradient(var(--blue) 0% 16.67%, var(--green) 16.67% 33.33%, var(--orange) 33.33% 50%, var(--gray) 50% 66.67%, var(--red) 66.67% 83.33%, var(--purple) 83.33% 100%);}
+.sigring::after{content:'';position:absolute;inset:16px;background:var(--navy);border-radius:50%}
+.sigtxt{font-size:22px;font-weight:700;letter-spacing:.05em;color:#fff;text-align:center;line-height:1.4}
+.sigsub{font-size:19px;color:#9FC3DB;text-align:center}
+
+@media print{
+  @page{size:38in 33in;margin:0}
+  body{background:none;padding:0;display:block}
+  .wrap{transform:none !important;margin-bottom:0 !important}
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+<div class="poster" id="poster">
+
+<!-- HEADER -->
+<header class="hdr">
+  <div>
+    <div class="tags">
+      <span class="tag tc">ICON2 - UofM</span>
+      <span class="tag tt">Nociplastic Pain · Digital Health</span>
+      <span class="tag tt">Computational Content Analysis</span>
+    </div>
+    <h1>Digital Phenotyping of the &ldquo;Invisible&rdquo; Patient: A Computational Analysis of Nociplastic Pain Narratives on Reddit and TikTok</h1>
+    <div class="sub">How patients with medically unexplained pain narrate validation, humor, and education across two very different platforms.</div>
+    <div class="authors">
+      <strong>Aya Mohamedelamin Khidir Ahmed · Youmna Ibraheem Abdelhai Ismail · Sara Anwar Ali · Raheeg Husam Hassan Mohamed · Malath Ahmed Fadul Abdelrahim · Mohamed Abdurahman Elgorashi Elmahi · Walaa Hashim Dahab · Malaz Salah Osman Gurashi · Arwa Mohamedelamin Khidir Ahmed · Razan Abdelrahman · Nadir Abdelrahman</strong><br><br>
+      Tele-Geriatric Research Fellowship, Okemos, MI, USA
+    </div>
+  </div>
+  <div class="badge">
+    <div class="ring"></div>
+    <span class="n">TGRF</span>
+    <span class="l">RESEARCH FELLOWSHIP</span>
+  </div>
+</header>
+<div class="stripe"></div>
+
+<!-- KEY TAKEAWAYS -->
+<div class="kt">
+  <div class="ktlb"><div class="ktl">Key Takeaways</div></div>
+  <div class="ktg">
+    <div class="kti">
+      <div class="ktt"><strong>POTS Drives Engagement</strong>POTS-related content was the single highest-engagement topic on both platforms — 68% of top TikTok videos, 36% of top Reddit posts.</div>
+    </div>
+    <div class="kti">
+      <div class="ktt"><strong>Two Platforms, Two Roles</strong>Reddit is a hub for peer education (79% of posts); TikTok normalizes illness through humor (34%) and day-in-the-life content (58%).</div>
+    </div>
+    <div class="kti">
+      <div class="ktt"><strong>Many Just Want to Be Believed</strong>Roughly a third of top posts on each platform (36% TikTok, 32% Reddit) center on seeking validation — a sign of frequent medical dismissal.</div>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- COLUMN 1 -->
+  <div class="col cL">
+
+    <section>
+      <div class="sh"><div class="bar bt"></div><h2>Introduction</h2></div>
+      <p style="margin-bottom:14px">Nociplastic pain is characterized by altered pain processing without clear evidence of tissue damage or nervous system injury. Many patients experience medical skepticism and dismissal, leading them to seek support through social media.</p>
+      <p>This study uses digital phenotyping to analyze the lived experiences of nociplastic pain patients on TikTok and Reddit, identifying narratives and coping mechanisms that can help improve clinical communication.</p>
+    </section>
+
+    <section>
+      <div class="sh"><div class="bar bg"></div><h2 style="color:var(--gold)">Why It Matters</h2></div>
+      <div class="pills">
+        <div class="pill">Patients with &ldquo;invisible&rdquo; pain conditions often encounter dismissal in clinical settings</div>
+        <div class="pill">Reddit and TikTok have become informal spaces for validation, education, and coping</div>
+        <div class="pill">Digital phenotyping can surface unmet patient needs that clinical encounters miss</div>
+        <div class="pill">POTS-related content draws disproportionately high engagement on both platforms</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sh"><div class="bar bt"></div><h2>Methods</h2></div>
+      <p>A custom Python script scraped publicly available posts from eight condition-specific subreddits and six TikTok hashtags, filtered by symptomology and community-identity keywords. After data cleaning, the 50 highest-engaging posts per platform were selected (N=100) and analyzed using a mixed-methods approach combining quantitative engagement metrics with a four-code qualitative rubric.</p>
+    </section>
+
+  </div><!-- /cL -->
+
+  <!-- COLUMN 2 -->
+  <div class="col cM">
+
+    <section>
+      <div class="sh"><div class="bar bs"></div><h2>Coding Rubric</h2></div>
+      <div class="el">
+        <div class="ei"><strong style="color:var(--navy)">Code 1 · Validation</strong> — seeking confirmation that symptoms and experiences are real</div>
+        <div class="ei"><strong style="color:var(--navy)">Code 2 · Education</strong> — sharing medical information or explaining the condition</div>
+        <div class="ei"><strong style="color:var(--navy)">Code 3 · Humor / Meme</strong> — using comedy to cope with or normalize symptoms</div>
+        <div class="ei"><strong style="color:var(--navy)">Code 4 · Symptom Flair / Vlog</strong> — day-in-the-life documentation of symptom flares</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sh"><div class="bar bn"></div><h2>Figure 1 · TikTok Themes</h2></div>
+      <div class="fb">
+        <div class="fh">TikTok top videos by theme (N=50)</div>
+        <div class="fd">
+          <div class="pie-wrap">
+            <div class="pie" style="background:conic-gradient(var(--blue) 0% 36%, var(--navy) 36% 70%, var(--orange) 70% 92%, var(--purple) 92% 100%)"></div>
+            <div class="pie-legend">
+              <div class="pl-item"><span class="pl-sw" style="background:var(--blue)"></span>Validation — 36% <span class="pl-code">· Code 1</span></div>
+              <div class="pl-item"><span class="pl-sw" style="background:var(--navy)"></span>Humor / Meme — 34% <span class="pl-code">· Code 3</span></div>
+              <div class="pl-item"><span class="pl-sw" style="background:var(--orange)"></span>Symptom Flair / Vlog — 22% <span class="pl-code">· Code 4</span></div>
+              <div class="pl-item"><span class="pl-sw" style="background:var(--purple)"></span>Education — 8% <span class="pl-code">· Code 2</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="fcap">58% of these same videos were also framed as &ldquo;day-in-the-life&rdquo; narratives, regardless of primary theme.</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sh"><div class="bar bn"></div><h2>Figure 2 · Themes by Platform</h2></div>
+      <div class="fb">
+        <div class="fh">Video / post themes — TikTok vs. Reddit</div>
+        <div class="fd">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px">
+            <div class="mbch">
+              <div class="mblabel">TikTok</div>
+              <div class="mbcrow"><div class="mbcname">Day in the life</div><div class="mbctrack"><div class="mbcfill" style="width:58%;background:var(--blue)"><span class="mbcval">58%</span></div></div></div>
+              <div class="mbcrow"><div class="mbcname">Educational</div><div class="mbctrack"><div class="mbcfill" style="width:40%;background:var(--navy)"><span class="mbcval">40%</span></div></div></div>
+              <div class="mbcrow"><div class="mbcname">Both</div><div class="mbctrack"><div class="mbcfill" style="width:2%;background:var(--gray)"><span class="mbcval" style="font-size:0">2%</span></div></div></div>
+            </div>
+            <div class="mbch">
+              <div class="mblabel">Reddit</div>
+              <div class="mbcrow"><div class="mbcname">Educational</div><div class="mbctrack"><div class="mbcfill" style="width:79.03%;background:var(--navy)"><span class="mbcval">79%</span></div></div></div>
+              <div class="mbcrow"><div class="mbcname">Gaslighting</div><div class="mbctrack"><div class="mbcfill" style="width:16.25%;background:var(--red)"><span class="mbcval">16%</span></div></div></div>
+              <div class="mbcrow"><div class="mbcname">Neither</div><div class="mbctrack"><div class="mbcfill" style="width:4.55%;background:var(--gray)"><span class="mbcval" style="font-size:0">5%</span></div></div></div>
+              <div class="mbcrow"><div class="mbcname">Both</div><div class="mbctrack"><div class="mbcfill" style="width:2%;background:var(--gold2)"><span class="mbcval" style="font-size:0">0.2%</span></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /cM -->
+
+  <!-- COLUMN 3 -->
+  <div class="col cR">
+
+    <section>
+      <div class="sh"><div class="bar bn"></div><h2>Figure 3 · Reddit Upvotes</h2></div>
+      <div class="fb">
+        <div class="fh">Reddit top posts — upvotes by code (N=50)</div>
+        <div class="fd">
+          <div class="pie-wrap">
+            <div class="pie" style="background:conic-gradient(var(--navy) 0% 64.02%, var(--blue) 64.02% 95.78%, var(--orange) 95.78% 99.8%, var(--gold2) 99.8% 100%)"></div>
+            <div class="pie-legend">
+              <div class="pl-item"><span class="pl-sw" style="background:var(--navy)"></span>Education — 64.0% <span class="pl-code">· Code 2</span></div>
+              <div class="pl-item"><span class="pl-sw" style="background:var(--blue)"></span>Validation — 31.8% <span class="pl-code">· Code 1</span></div>
+              <div class="pl-item"><span class="pl-sw" style="background:var(--orange)"></span>Humor / Meme — 4.0% <span class="pl-code">· Code 3</span></div>
+              <div class="pl-item"><span class="pl-sw" style="background:var(--gold2)"></span>Symptom Flair / Vlog — 0.2% <span class="pl-code">· Code 4</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sh"><div class="bar bg"></div><h2>Results</h2></div>
+      <div class="stats">
+        <div class="sc"><div class="sn">100</div><div class="sct"><div class="sd">Posts analyzed — 50 from TikTok, 50 from Reddit</div></div></div>
+        <div class="sc"><div class="sn">68% / 36%</div><div class="sct"><div class="sd">Share of top posts about POTS — TikTok vs. Reddit</div></div></div>
+        <div class="sc"><div class="sn">79%</div><div class="sct"><div class="sd">Reddit posts containing educational content</div></div></div>
+        <div class="sc"><div class="sn">58%</div><div class="sct"><div class="sd">TikTok videos framed as day-in-the-life narratives</div></div></div>
+      </div>
+      <ul style="margin-top:20px">
+        <li>Validation-seeking appears in roughly a third of top posts on both platforms (36% TikTok, 32% Reddit)</li>
+        <li>Humor and coping content makes up 34% of TikTok's top videos, far more than on Reddit</li>
+        <li>Reddit's top posts skew heavily educational (79%); TikTok's skew toward lived-experience vlogging (58%)</li>
+        <li>POTS-related content is the single highest-engagement topic studied, on both platforms</li>
+      </ul>
+    </section>
+
+  </div><!-- /cR -->
+
+  <!-- COLUMN 4 -->
+  <div class="col cD">
+
+    <section>
+      <div class="sh"><div class="bar bn"></div><h2>Discussion</h2></div>
+      <div class="feat">
+        <div class="fc"><strong>TikTok Narratives</strong>Seeking validation (36%) and humor/coping (34%) dominate; 58% of videos are framed as day-in-the-life.</div>
+        <div class="fc"><strong>Reddit Narratives</strong>Medical education leads (64%), alongside validation-seeking (32%); 79% of posts contain educational content.</div>
+        <div class="fc"><strong>Engagement — TikTok</strong>POTS-related content drives 68% of top engagement, the highest of any topic studied.</div>
+        <div class="fc"><strong>Engagement — Reddit</strong>POTS-related content drives 36% of top engagement — again the single highest topic.</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sh"><div class="bar bt"></div><h2>Conclusions</h2></div>
+      <div class="concl">
+        <div class="ci2"><div class="dot"></div><div class="ct3">Reddit and TikTok serve distinct but complementary roles for patients with nociplastic pain.</div></div>
+        <div class="ci2"><div class="dot"></div><div class="ct3">Reddit provides a space for validation and peer education; TikTok normalizes experience through humor and day-in-the-life content.</div></div>
+        <div class="ci2"><div class="dot"></div><div class="ct3">High POTS engagement highlights significant unmet clinical needs. Understanding these digital narratives can support a more patient-centered model that validates the &ldquo;invisible&rdquo; aspects of chronic illness.</div></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="cms">
+        <div class="cm2 ca"><div class="ct2">Study Type</div><div class="cd">Retrospective, mixed-methods computational content analysis of publicly available social media posts.</div></div>
+        <div class="cm2 cb"><div class="ct2">Disclosures</div><div class="cd">The authors declare no competing financial interests related to this work.</div></div>
+      </div>
+    </section>
+
+  </div><!-- /cD -->
+
+</div><!-- /body -->
+
+  <!-- FOOTER -->
+<footer class="footer">
+  <div>
+    <div class="ftl">Key Definitions</div>
+    <ul>
+      <li>Nociplastic pain — altered pain processing without clear evidence of tissue or nerve damage</li>
+      <li>Digital phenotyping — characterizing lived experience through patterns in online activity</li>
+      <li>POTS — Postural Orthostatic Tachycardia Syndrome, a frequent comorbid diagnosis in this population</li>
+    </ul>
+  </div>
+  <div>
+    <div class="ftl">Study Design</div>
+    <ul>
+      <li>N=100 top-engaging posts (50 Reddit, 50 TikTok)</li>
+      <li>Eight condition-specific subreddits · six TikTok hashtags</li>
+      <li>Four-code qualitative rubric: Validation, Education, Humor/Meme, Symptom Flair/Vlog</li>
+    </ul>
+  </div>
+  <div>
+    <div class="ftl">Information</div>
+    <ul>
+      <li>Tele-Geriatric Research Fellowship</li>
+      <li>Okemos, MI, USA</li>
+      <li>Analysis of publicly available social media posts</li>
+    </ul>
+  </div>
+  <div class="sig">
+    <div class="sigring"></div>
+    <div class="sigtxt">TELE-GERIATRIC<br>RESEARCH FELLOWSHIP</div>
+    <div class="sigsub">Okemos, MI · USA</div>
+  </div>
+</footer>
+</div></div>
+<script>
+(function(){
+  var wrap=document.getElementById('wrap');
+  var poster=document.getElementById('poster');
+  function sc(){
+    var vw=window.innerWidth-48;
+    var s=Math.min(vw/3648,1);
+    wrap.style.transform='scale('+s+')';
+    wrap.style.transformOrigin='top center';
+    var h=poster.offsetHeight;
+    wrap.style.marginBottom=(h*s-h)+'px';
+  }
+  window.addEventListener('load',sc);
+  window.addEventListener('resize',sc);
+})();
+</script>
+</body>
+</html>
